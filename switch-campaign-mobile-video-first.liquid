@@ -1,0 +1,66 @@
+<style>
+.video-container-html {
+  position: relative;
+  padding-bottom: calc(var(--aspect-ratio, .5625) * 100%);
+  height: 0;
+  width: 100%;
+}
+
+.video-container-html iframe,
+.video-container-html video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+</style>
+<section {% if section.settings.select != blank %}id="{{section.settings.select | handleize }}"{% endif%} class=" single-videos active_section section is-width-standard" data-section-id="{{ section.id }}">
+
+  <div class="page-width">
+
+    <div class="video_width">
+         {%- if section.settings.video_link != blank -%}
+        <div class="video-container-html" style="--aspect-ratio: 16 / 9;">
+          <video  autoplay loop muted playsinline>
+            <source src="{{ section.settings.video_link }}" type="video/mp4">
+         
+          Your browser does not support the video tag.
+          </video>
+
+          {% if section.settings.youtube_link != empty %}
+          <a href="{{ section.settings.youtube_link }}" class="youtube_click" target="_blank" ></a>
+          {% endif %}
+        </div>
+      {%- endif -%}
+
+    </div>
+
+  </div>
+
+</section>
+ 
+{% schema %}
+  {
+    "name": "Mobile video first",
+    "class": "mobile-video-first mobile-video",
+    "settings": [
+      {
+        "type": "textarea",
+        "id": "video_link",
+        "label": "Video .mp4 only"
+      },
+      {
+        "type": "textarea",
+        "id": "youtube_link",
+        "label": "Youtube link"
+      } 
+    ],
+    "presets": [
+      {
+        "name": "Mobile video first"
+      }
+    ]
+  }
+{% endschema %}
+ 
